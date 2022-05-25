@@ -1,0 +1,141 @@
+
+<h2>Validaciones Reactivas</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+
+        <form autocomplete="off" [formGroup]="myForm" (ngSubmit)="submitForm()">
+
+            <!-- Nombre -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="name"
+                        placeholder="Nombre y apellido del usuario"
+                    >
+                    <span
+                        class="form-text text-danger"
+                        *ngIf="noValidField('name')"
+                    >
+                        Debe tener formato de nombre y apellido
+                    </span>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                    <input
+                        type="email"
+                        class="form-control"
+                        formControlName="email"
+                        placeholder="Email del usuario"
+                    >
+                    <span
+                        class="form-text text-danger"
+                        *ngIf="noValidField('email')"
+                    >
+                        {{emailErrorMsg}}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Username -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Nombre de usuario</label>
+                <div class="col-sm-9">
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="username"
+                        placeholder="Nombre de usuario"
+                    >
+                    <span
+                        class="form-text text-danger"
+                        *ngIf="noValidField('username')"
+                    >
+                        El usuario no puede ser Strider
+                    </span>
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Contraseña</label>
+                <div class="col-sm-9">
+                    <input
+                        type="password"
+                        class="form-control"
+                        formControlName="password"
+                        placeholder="Contraseña"
+                    >
+                        <span
+                        class="form-text text-danger"
+                        *ngIf="noValidField('password')"
+                    >
+                        La contraseña debe tener 6 o más caracteres
+                    </span>
+                </div>
+            </div>
+
+            <!-- Confirmar Password -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Confirmar contraseña</label>
+                <div class="col-sm-9">
+                    <input
+                        type="password"
+                        class="form-control"
+                        formControlName="confirmPassword"
+                        placeholder="Confirmar contraseña"
+                    >
+                    <span
+                        class="form-text text-danger"
+                        *ngIf="noValidField('confirmPassword')"
+                    >
+                        Las contraseñas deben ser iguales
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button 
+                        type="submit"
+                        [disabled]="myForm.pending"
+                        class="btn btn-primary float-end"
+                    >
+                        Registrar
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<h2>Form Valid: {{myForm.valid}}</h2>
+<h2>Form Status: {{myForm.status}}</h2>
+<h2>Form pending: {{myForm.pending}}</h2>
+<h2>Form Errors</h2>
+<pre>{{myForm.errors | json}}</pre>
+
+<h2>Name</h2>
+<pre>{{myForm.controls.name.errors |json}}</pre>
+
+<h2>Email</h2>
+<pre>{{myForm.controls.email.errors |json}}</pre>
+
+<h2>Username</h2>
+<pre>{{myForm.controls.username.errors |json}}</pre>
+
+<h2>Password</h2>
+<pre>{{myForm.controls.password.errors |json}}</pre>
+
+<h2>Confirm Password</h2>
+<pre>{{myForm.controls.confirmPassword.errors |json}}</pre>
